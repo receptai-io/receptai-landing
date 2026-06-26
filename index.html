@@ -3,647 +3,574 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReceptAI — More 5-Star Reviews, Automatically</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<title>ReceptAI — Never Miss a Call. Never Miss a Review.</title>
+<meta name="description" content="ReceptAI runs two AI voice agents for your business: one answers the phone, one follows up after every job. Capture every lead and every 5-star review, automatically.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #0b1520;
-    --surface: #111e2e;
-    --border: #1e3048;
-    --teal: #00C9A7;
-    --teal-dim: rgba(0,201,167,0.12);
-    --white: #f0f6ff;
-    --muted: #7a94b0;
-    --red: #ff5c5c;
-    --yellow: #ffc94d;
-    --green: #00C9A7;
+  :root{
+    --bg:#0a0e17;
+    --surface:#121829;
+    --surface-2:#1a2236;
+    --border:#262f47;
+    --ink:#edf1f7;
+    --ink-dim:#8c97ae;
+    --ink-faint:#5b6680;
+    --gold:#f2b84b;
+    --gold-dim:rgba(242,184,75,0.13);
+    --gold-line:rgba(242,184,75,0.35);
+    --cyan:#4fd1e8;
+    --cyan-dim:rgba(79,209,232,0.13);
+    --cyan-line:rgba(79,209,232,0.35);
+    --coral:#e8694f;
+    --coral-dim:rgba(232,105,79,0.14);
+    --radius:14px;
+    --maxw:1180px;
   }
 
-  html { scroll-behavior: smooth; }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ::selection{background:var(--gold-dim);}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px;}
 
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  section{padding:96px 0;}
+  @media (max-width:720px){section{padding:64px 0;}}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+  .eyebrow.gold .dot{background:var(--gold);box-shadow:0 0 8px var(--gold);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,14,23,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;max-width:var(--maxw);margin:0 auto;
+  }
+  .logo{font-family:'Sora',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.02em;}
+  .logo span{color:var(--cyan);}
+  .navlinks{display:flex;gap:32px;font-size:14.5px;color:var(--ink-dim);}
+  .navlinks a:hover{color:var(--ink);}
+  .navcta{
+    font-size:14px;font-weight:600;
+    background:var(--ink);color:var(--bg);
+    padding:10px 18px;border-radius:999px;
+    transition:transform .15s ease;
+  }
+  .navcta:hover{transform:translateY(-1px);}
+  @media (max-width:760px){.navlinks{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:72px;padding-bottom:60px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;
+  }
+  @media (max-width:920px){.hero-grid{grid-template-columns:1fr;}}
+
+  .hero h1{font-size:clamp(34px,4.4vw,56px);line-height:1.06;color:var(--ink);}
+  .hero h1 em{
+    font-style:normal;color:var(--bg);
+    background:linear-gradient(90deg,var(--cyan),var(--gold));
+    padding:0 6px;border-radius:6px;
+  }
+  .hero p.lede{
+    margin-top:22px;font-size:18px;color:var(--ink-dim);max-width:520px;
+  }
+  .hero-ctas{display:flex;align-items:center;gap:18px;margin-top:34px;flex-wrap:wrap;}
+  .btn-primary{
+    font-weight:600;font-size:15.5px;
+    background:linear-gradient(90deg,var(--cyan),var(--gold));
+    color:#0a0e17;padding:14px 26px;border-radius:999px;
+    box-shadow:0 8px 26px rgba(79,209,232,0.18);
+    transition:transform .15s ease, box-shadow .15s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(79,209,232,0.26);}
+  .hero-sub{font-size:13.5px;color:var(--ink-faint);}
+
+  /* live call log */
+  .calllog{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    overflow:hidden;
+    position:relative;
+    height:430px;
+  }
+  .calllog::before, .calllog::after{
+    content:"";position:absolute;left:0;right:0;height:40px;z-index:2;pointer-events:none;
+  }
+  .calllog::before{top:0;background:linear-gradient(var(--surface),transparent);}
+  .calllog::after{bottom:0;background:linear-gradient(transparent,var(--surface));}
+  .calllog-head{
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-faint);
+    padding:2px 6px 14px;border-bottom:1px solid var(--border);margin-bottom:8px;
+  }
+  .calllog-head .live{display:flex;align-items:center;gap:6px;color:var(--cyan);}
+  .calllog-head .live .pulse{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.25;}}
+
+  .calllog-track{
+    display:flex;flex-direction:column;gap:10px;
+    animation:scrollLog 26s linear infinite;
+  }
+  .calllog:hover .calllog-track{animation-play-state:paused;}
+  @keyframes scrollLog{0%{transform:translateY(0);}100%{transform:translateY(-50%);}}
+
+  .callcard{
+    border:1px solid var(--border);
+    background:var(--surface-2);
+    border-radius:10px;
+    padding:12px 14px;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .callcard.cyan{border-left:3px solid var(--cyan);}
+  .callcard.gold{border-left:3px solid var(--gold);}
+  .callcard.alert{border-left:3px solid var(--coral);}
+  .callcard .row1{display:flex;justify-content:space-between;align-items:baseline;}
+  .callcard .time{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-faint);}
+  .callcard .agent{font-size:11.5px;font-weight:600;}
+  .callcard.cyan .agent{color:var(--cyan);}
+  .callcard.gold .agent{color:var(--gold);}
+  .callcard.alert .agent{color:var(--coral);}
+  .callcard .desc{font-size:13.5px;color:var(--ink-dim);}
+  .callcard .outcome{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    display:inline-flex;align-items:center;gap:6px;margin-top:2px;
+  }
+  .callcard.cyan .outcome{color:var(--cyan);}
+  .callcard.gold .outcome{color:var(--gold);}
+  .callcard.alert .outcome{color:var(--coral);}
+
+  @media (prefers-reduced-motion: reduce){
+    .calllog-track{animation:none;}
+    .calllog-head .pulse{animation:none;}
   }
 
-  h1, h2, h3, .display {
-    font-family: 'Space Grotesk', sans-serif;
+  /* ---------- TWO SYSTEMS ---------- */
+  .section-head{max-width:620px;margin-bottom:48px;}
+  .section-head h2{font-size:clamp(26px,3vw,38px);}
+  .section-head p{color:var(--ink-dim);font-size:16.5px;margin-top:14px;}
+
+  .systems-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media (max-width:860px){.systems-grid{grid-template-columns:1fr;}}
+
+  .system-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .system-card.cyan{border-top:2px solid var(--cyan);}
+  .system-card.gold{border-top:2px solid var(--gold);}
+  .system-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;
+    text-transform:uppercase;padding:5px 10px;border-radius:999px;
+    display:inline-block;margin-bottom:18px;
+  }
+  .system-card.cyan .system-tag{background:var(--cyan-dim);color:var(--cyan);}
+  .system-card.gold .system-tag{background:var(--gold-dim);color:var(--gold);}
+  .system-card h3{font-size:24px;margin-bottom:6px;}
+  .system-card .when{font-size:14.5px;color:var(--ink-dim);margin-bottom:22px;}
+
+  .mini-transcript{
+    background:var(--surface-2);border:1px solid var(--border);border-radius:12px;
+    padding:16px;margin-bottom:22px;
+  }
+  .mini-transcript .line{font-size:13.5px;margin-bottom:10px;color:var(--ink-dim);}
+  .mini-transcript .line:last-child{margin-bottom:0;}
+  .mini-transcript .who{font-weight:600;color:var(--ink);}
+  .system-card.cyan .mini-transcript .who.agent{color:var(--cyan);}
+  .system-card.gold .mini-transcript .who.agent{color:var(--gold);}
+
+  .feature-list{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:11px;}
+  .feature-list li{display:flex;gap:10px;font-size:14.5px;color:var(--ink-dim);align-items:flex-start;}
+  .feature-list li::before{content:"";width:6px;height:6px;border-radius:50%;margin-top:7px;flex:none;}
+  .system-card.cyan .feature-list li::before{background:var(--cyan);}
+  .system-card.gold .feature-list li::before{background:var(--gold);}
+  .system-price{font-family:'Sora',sans-serif;font-weight:700;font-size:20px;}
+  .system-price span{font-family:'Inter',sans-serif;font-weight:500;font-size:13.5px;color:var(--ink-faint);}
+
+  /* ---------- HOW IT WORKS (two tracks) ---------- */
+  .tracks{display:flex;flex-direction:column;gap:18px;}
+  .track{
+    background:var(--surface);border:1px solid var(--border);border-radius:18px;
+    padding:28px 32px;
+  }
+  .track-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap;}
+  .track-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;
+    text-transform:uppercase;padding:5px 10px;border-radius:999px;
+  }
+  .track.cyan .track-badge{background:var(--cyan-dim);color:var(--cyan);}
+  .track.gold .track-badge{background:var(--gold-dim);color:var(--gold);}
+  .track-head h3{font-size:19px;}
+  .track-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:780px){.track-steps{grid-template-columns:1fr;}}
+  .step .num{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-faint);margin-bottom:8px;
+  }
+  .track.cyan .step .num{color:var(--cyan);}
+  .track.gold .step .num{color:var(--gold);}
+  .step h4{font-size:15.5px;font-weight:600;margin-bottom:6px;color:var(--ink);font-family:'Inter',sans-serif;}
+  .step p{font-size:14px;color:var(--ink-dim);margin:0;}
+
+  /* ---------- PRICING ---------- */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;}
+  @media (max-width:920px){.pricing-grid{grid-template-columns:1fr;}}
+  .price-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:18px;
+    padding:30px;display:flex;flex-direction:column;position:relative;
+  }
+  .price-card.gold-edge{border-color:var(--gold-line);}
+  .price-card.cyan-edge{border-color:var(--cyan-line);}
+  .price-card.bundle{
+    background:linear-gradient(160deg,rgba(242,184,75,0.07),rgba(79,209,232,0.07));
+    border:1px solid transparent;
+    background-clip:padding-box;
+    box-shadow:0 0 0 1px rgba(242,184,75,0.25), 0 0 0 1px rgba(79,209,232,0.15) inset;
+  }
+  .badge-popular{
+    position:absolute;top:-12px;right:24px;
+    background:linear-gradient(90deg,var(--cyan),var(--gold));
+    color:#0a0e17;font-size:11.5px;font-weight:700;
+    padding:5px 12px;border-radius:999px;font-family:'IBM Plex Mono',monospace;
+  }
+  .price-card .pname{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;}
+  .price-card .pamount{font-family:'Sora',sans-serif;font-weight:800;font-size:36px;margin-bottom:2px;}
+  .price-card .pamount span{font-size:14px;font-weight:500;color:var(--ink-faint);font-family:'Inter',sans-serif;}
+  .price-card .pdesc{font-size:14px;color:var(--ink-dim);margin-bottom:20px;}
+  .price-card ul{list-style:none;padding:0;margin:0 0 26px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .price-card li{font-size:13.8px;color:var(--ink-dim);display:flex;gap:9px;align-items:flex-start;}
+  .price-card li::before{content:"✓";color:var(--cyan);flex:none;font-weight:700;}
+  .price-card.bundle li::before{color:var(--gold);}
+  .price-cta{
+    text-align:center;font-weight:600;font-size:14.5px;
+    border:1px solid var(--border);border-radius:999px;padding:11px;
+    transition:background .15s ease;
+  }
+  .price-cta:hover{background:var(--surface-2);}
+  .price-card.bundle .price-cta{
+    background:linear-gradient(90deg,var(--cyan),var(--gold));color:#0a0e17;border:none;
   }
 
-  /* NAV */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: rgba(11,21,32,0.95);
-    backdrop-filter: blur(12px);
-    z-index: 100;
+  /* ---------- FINAL CTA ---------- */
+  .finalcta{
+    text-align:center;background:var(--surface);border:1px solid var(--border);
+    border-radius:24px;padding:64px 32px;
   }
+  .finalcta h2{font-size:clamp(26px,3.4vw,38px);margin-bottom:16px;}
+  .finalcta p{color:var(--ink-dim);font-size:16px;margin-bottom:30px;}
 
-  .logo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--white);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .logo-dot { color: var(--teal); }
-
-  .nav-cta {
-    background: var(--teal);
-    color: #0b1520;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 10px 22px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-  .nav-cta:hover { opacity: 0.85; }
-
-  /* HERO */
-  .hero {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 90px 40px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-
-  .hero-eyebrow {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--teal);
-    background: var(--teal-dim);
-    padding: 6px 14px;
-    border-radius: 100px;
-    margin-bottom: 24px;
-  }
-
-  .hero h1 {
-    font-size: clamp(36px, 4vw, 52px);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    letter-spacing: -0.02em;
-  }
-
-  .hero h1 span { color: var(--teal); }
-
-  .hero-sub {
-    font-size: 18px;
-    color: var(--muted);
-    margin-bottom: 36px;
-    line-height: 1.7;
-  }
-
-  .hero-cta {
-    display: inline-block;
-    background: var(--teal);
-    color: #0b1520;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 16px 36px;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: transform 0.2s, opacity 0.2s;
-  }
-  .hero-cta:hover { transform: translateY(-2px); opacity: 0.9; }
-
-  .hero-note {
-    margin-top: 14px;
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  /* CALL SIMULATOR */
-  .simulator {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 28px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .sim-header {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 20px;
-  }
-
-  .sim-phone {
-    background: #0b1520;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-
-  .sim-caller {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .sim-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--teal-dim);
-    border: 2px solid var(--teal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-
-  .sim-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-  }
-
-  .sim-title {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .sim-pulse {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--teal);
-    font-weight: 500;
-  }
-
-  .pulse-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--teal);
-    animation: pulse 1.4s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
-  .sim-bubble {
-    background: var(--surface);
-    border-radius: 12px 12px 12px 0;
-    padding: 12px 16px;
-    font-size: 14px;
-    color: var(--white);
-    margin-bottom: 8px;
-    border: 1px solid var(--border);
-    animation: fadeSlide 0.5s ease forwards;
-    opacity: 0;
-  }
-
-  .sim-bubble:nth-child(1) { animation-delay: 0.2s; }
-  .sim-bubble:nth-child(2) { animation-delay: 1.2s; }
-  .sim-bubble:nth-child(3) { animation-delay: 2.4s; }
-
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .sim-route {
-    display: flex;
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .sim-route-btn {
-    flex: 1;
-    padding: 10px;
-    border-radius: 10px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    text-align: center;
-    border: 1px solid;
-  }
-
-  .route-happy {
-    background: rgba(0,201,167,0.12);
-    border-color: var(--teal);
-    color: var(--teal);
-  }
-
-  .route-unhappy {
-    background: rgba(255,92,92,0.08);
-    border-color: rgba(255,92,92,0.3);
-    color: #ff5c5c;
-  }
-
-  /* HOW IT WORKS */
-  .section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 80px 40px;
-  }
-
-  .section-label {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 14px;
-  }
-
-  .section-title {
-    font-size: clamp(28px, 3vw, 40px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 14px;
-  }
-
-  .section-sub {
-    font-size: 17px;
-    color: var(--muted);
-    max-width: 520px;
-    margin-bottom: 56px;
-  }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .step {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    position: relative;
-    transition: border-color 0.2s;
-  }
-  .step:hover { border-color: var(--teal); }
-
-  .step-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--teal);
-    margin-bottom: 16px;
-    text-transform: uppercase;
-  }
-
-  .step-icon {
-    font-size: 28px;
-    margin-bottom: 14px;
-  }
-
-  .step h3 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  .step p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.65;
-  }
-
-  /* DIVIDER */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  /* PRICING */
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 48px;
-  }
-
-  .pricing-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    transition: border-color 0.2s;
-  }
-
-  .pricing-card:hover { border-color: var(--teal); }
-
-  .pricing-card.featured {
-    border-color: var(--teal);
-    background: linear-gradient(135deg, rgba(0,201,167,0.08), var(--surface));
-  }
-
-  .featured-badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #0b1520;
-    background: var(--teal);
-    padding: 4px 10px;
-    border-radius: 100px;
-    margin-bottom: 16px;
-  }
-
-  .plan-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-
-  .plan-price {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  .plan-price span {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--muted);
-  }
-
-  .plan-desc {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 20px;
-  }
-
-  .plan-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .plan-features li {
-    font-size: 14px;
-    color: var(--muted);
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .plan-features li::before {
-    content: '✓';
-    color: var(--teal);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* CTA SECTION */
-  .cta-section {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .cta-inner {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 100px 40px;
-    text-align: center;
-  }
-
-  .cta-inner h2 {
-    font-size: clamp(30px, 3.5vw, 44px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
-  }
-
-  .cta-inner h2 span { color: var(--teal); }
-
-  .cta-inner p {
-    font-size: 17px;
-    color: var(--muted);
-    margin-bottom: 36px;
-  }
-
-  .cta-btn {
-    display: inline-block;
-    background: var(--teal);
-    color: #0b1520;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 17px;
-    padding: 18px 48px;
-    border-radius: 12px;
-    text-decoration: none;
-    transition: transform 0.2s, opacity 0.2s;
-  }
-  .cta-btn:hover { transform: translateY(-2px); opacity: 0.9; }
-
-  .cta-note {
-    margin-top: 14px;
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  /* FOOTER */
-  footer {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 32px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
-    .hero { grid-template-columns: 1fr; padding: 50px 20px 40px; gap: 40px; }
-    .steps { grid-template-columns: 1fr; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .section { padding: 60px 20px; }
-    footer { flex-direction: column; gap: 12px; text-align: center; }
+  footer{
+    border-top:1px solid var(--border);padding:32px 0;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13.5px;color:var(--ink-faint);flex-wrap:wrap;gap:12px;
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="logo">ReceptAI<span class="logo-dot">.</span></a>
-  <a href="https://calendly.com/ninosasa-trades/30min" class="nav-cta">Book a Demo</a>
-</nav>
+<header>
+  <div class="nav">
+    <div class="logo">ReceptAI<span>.</span></div>
+    <nav class="navlinks">
+      <a href="#receptionist">AI Receptionist</a>
+      <a href="#reputation">Reputation Engine</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a class="navcta" href="https://calendly.com/ninosasa-trades/30min">Book a Demo</a>
+  </div>
+</header>
 
-<!-- HERO -->
-<section>
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-eyebrow">AI-Powered Review Growth</div>
-      <h1>Turn happy customers into <span>5-star reviews</span> — automatically.</h1>
-      <p class="hero-sub">ReceptAI calls your customers after every job, detects how they feel, and routes them straight to Google Reviews. No chasing. No awkward asks. Just results.</p>
-      <a href="https://calendly.com/ninosasa-trades/30min" class="hero-cta">Book a Free 15-Min Demo →</a>
-      <p class="hero-note">No pressure. See exactly how it works for your business.</p>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>AI Voice Systems for Australian Small Business</div>
+      <h1>Never miss a call.<br>Never miss a <em>review</em>.</h1>
+      <p class="lede">ReceptAI runs two AI voice agents for your business — one answers the phone when it rings, one follows up after every job. Together they capture every lead and every 5-star review, automatically.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="https://calendly.com/ninosasa-trades/30min">Book a Free 15-Min Demo →</a>
+        <span class="hero-sub">No lock-in. Cancel anytime.</span>
+      </div>
     </div>
 
-    <!-- CALL SIMULATOR -->
-    <div class="simulator">
-      <div class="sim-header">Live call — 2 hrs after job completion</div>
-      <div class="sim-phone">
-        <div class="sim-caller">
-          <div class="sim-avatar">🤖</div>
-          <div>
-            <div class="sim-name">Emma — ReceptAI</div>
-            <div class="sim-title">AI Follow-up Agent</div>
+    <div class="calllog">
+      <div class="calllog-head">
+        <span>CALL LOG — TODAY</span>
+        <span class="live"><span class="pulse"></span>LIVE</span>
+      </div>
+      <div class="calllog-track" id="calllogTrack">
+        <div class="callcard cyan">
+          <div class="row1"><span class="time">09:14</span><span class="agent">JAKE — RECEPTIONIST</span></div>
+          <div class="desc">Missed call answered in 2 rings — hot water emergency</div>
+          <div class="outcome">→ Booking captured, sent to owner</div>
+        </div>
+        <div class="callcard gold">
+          <div class="row1"><span class="time">11:32</span><span class="agent">EMMA — REPUTATION</span></div>
+          <div class="desc">Follow-up call to Dave, 2 hrs after job completion</div>
+          <div class="outcome">→ 5★ Google review sent</div>
+        </div>
+        <div class="callcard cyan">
+          <div class="row1"><span class="time">13:05</span><span class="agent">JAKE — RECEPTIONIST</span></div>
+          <div class="desc">After-hours call, new lead asking about pricing</div>
+          <div class="outcome">→ Lead details captured by SMS</div>
+        </div>
+        <div class="callcard alert">
+          <div class="row1"><span class="time">16:48</span><span class="agent">EMMA — REPUTATION</span></div>
+          <div class="desc">Follow-up call to Sarah — sentiment flagged unhappy</div>
+          <div class="outcome">→ Owner alerted privately</div>
+        </div>
+        <div class="callcard cyan">
+          <div class="row1"><span class="time">18:20</span><span class="agent">JAKE — RECEPTIONIST</span></div>
+          <div class="desc">Missed call answered while owner was on a job</div>
+          <div class="outcome">→ Booking captured, sent to owner</div>
+        </div>
+        <!-- duplicate set for seamless loop -->
+        <div class="callcard cyan">
+          <div class="row1"><span class="time">09:14</span><span class="agent">JAKE — RECEPTIONIST</span></div>
+          <div class="desc">Missed call answered in 2 rings — hot water emergency</div>
+          <div class="outcome">→ Booking captured, sent to owner</div>
+        </div>
+        <div class="callcard gold">
+          <div class="row1"><span class="time">11:32</span><span class="agent">EMMA — REPUTATION</span></div>
+          <div class="desc">Follow-up call to Dave, 2 hrs after job completion</div>
+          <div class="outcome">→ 5★ Google review sent</div>
+        </div>
+        <div class="callcard cyan">
+          <div class="row1"><span class="time">13:05</span><span class="agent">JAKE — RECEPTIONIST</span></div>
+          <div class="desc">After-hours call, new lead asking about pricing</div>
+          <div class="outcome">→ Lead details captured by SMS</div>
+        </div>
+        <div class="callcard alert">
+          <div class="row1"><span class="time">16:48</span><span class="agent">EMMA — REPUTATION</span></div>
+          <div class="desc">Follow-up call to Sarah — sentiment flagged unhappy</div>
+          <div class="outcome">→ Owner alerted privately</div>
+        </div>
+        <div class="callcard cyan">
+          <div class="row1"><span class="time">18:20</span><span class="agent">JAKE — RECEPTIONIST</span></div>
+          <div class="desc">Missed call answered while owner was on a job</div>
+          <div class="outcome">→ Booking captured, sent to owner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="systems">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Two Agents, One Team</div>
+      <h2>Built to cover both ends of the phone call</h2>
+      <p>Most businesses lose money on two sides of the same problem: calls that go unanswered, and reviews that never get asked for. ReceptAI runs a dedicated AI agent for each.</p>
+    </div>
+
+    <div class="systems-grid">
+      <div class="system-card cyan" id="receptionist">
+        <span class="system-tag">Inbound</span>
+        <h3>AI Receptionist</h3>
+        <div class="when">Jake answers when the phone rings.</div>
+        <div class="mini-transcript">
+          <div class="line"><span class="who agent">Jake:</span> "G'day, thanks for calling Nino's Plumbing — sorry we couldn't grab that, I'm Jake, the AI assistant. What can I help with today?"</div>
+          <div class="line"><span class="who">Caller:</span> "Hey, my hot water's out, need someone today if possible."</div>
+          <div class="line"><span class="who agent">Jake:</span> "No worries, I can get that locked in. What's the best number and a good time for someone to call you back?"</div>
+        </div>
+        <ul class="feature-list">
+          <li>Answers every call, 24/7 — including after hours</li>
+          <li>Qualifies the caller and captures job details</li>
+          <li>Sends the booking straight to your phone, ready to action</li>
+          <li>Handles pricing and FAQ questions without you lifting a finger</li>
+        </ul>
+        <div class="system-price">A$149<span>/mo</span></div>
+      </div>
+
+      <div class="system-card gold" id="reputation">
+        <span class="system-tag">Outbound</span>
+        <h3>Reputation Engine</h3>
+        <div class="when">Emma calls after the job's done.</div>
+        <div class="mini-transcript">
+          <div class="line"><span class="who agent">Emma:</span> "Hi Dave, it's Emma from Nino's Plumbing — just checking how everything went with your hot water system today?"</div>
+          <div class="line"><span class="who">Dave:</span> "Yeah, good — sorted it quick."</div>
+          <div class="line"><span class="who agent">Emma:</span> "That's great to hear! Would you mind leaving a quick Google review? Link's on its way to your phone now."</div>
+        </div>
+        <ul class="feature-list">
+          <li>Calls every customer roughly 2 hours after the job</li>
+          <li>Reads their tone, not just their words</li>
+          <li>Happy customers get a Google review link on the spot</li>
+          <li>Unhappy ones get flagged to you privately, before they go public</li>
+        </ul>
+        <div class="system-price">A$149<span>/mo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow gold"><span class="dot"></span>How It Works</div>
+      <h2>Two tracks. Zero effort from you.</h2>
+      <p>Each agent runs its own process in the background. You don't dial, you don't chase — you just run your business.</p>
+    </div>
+
+    <div class="tracks">
+      <div class="track cyan">
+        <div class="track-head">
+          <span class="track-badge">Track A — Inbound</span>
+          <h3>When the phone rings, in real time</h3>
+        </div>
+        <div class="track-steps">
+          <div class="step">
+            <div class="num">01</div>
+            <h4>Call comes in</h4>
+            <p>Jake picks up in under 2 seconds, any time of day — even after hours or when you're on a job.</p>
           </div>
-          <div class="sim-pulse" style="margin-left:auto">
-            <div class="pulse-dot"></div> Live
+          <div class="step">
+            <div class="num">02</div>
+            <h4>Jake qualifies the caller</h4>
+            <p>Gets the job, the urgency, and the contact details — no scripts, no robotic prompts.</p>
+          </div>
+          <div class="step">
+            <div class="num">03</div>
+            <h4>You get the booking</h4>
+            <p>Details land straight on your phone, ready to action. No voicemail, no missed lead.</p>
           </div>
         </div>
-        <div class="sim-bubble">"Hi Dave, it's Emma calling from Nino's Plumbing — just checking how everything went with your hot water system today?"</div>
-        <div class="sim-bubble">"That's great to hear! Would you mind leaving us a quick Google review? I'll send you a link right now."</div>
-        <div class="sim-bubble">"Link sent to your phone. Thanks Dave, have a great evening! 🌟"</div>
       </div>
-      <div class="sim-route">
-        <div class="sim-route-btn route-happy">😊 Happy → Google Review</div>
-        <div class="sim-route-btn route-unhappy">😠 Unhappy → Owner Alert</div>
+
+      <div class="track gold">
+        <div class="track-head">
+          <span class="track-badge">Track B — Outbound</span>
+          <h3>After the job's done, on autopilot</h3>
+        </div>
+        <div class="track-steps">
+          <div class="step">
+            <div class="num">01</div>
+            <h4>You mark the job done</h4>
+            <p>Takes ten seconds — that's the only thing you have to remember to do.</p>
+          </div>
+          <div class="step">
+            <div class="num">02</div>
+            <h4>Emma calls a couple hours later</h4>
+            <p>Checks in on the experience and detects sentiment in real time.</p>
+          </div>
+          <div class="step">
+            <div class="num">03</div>
+            <h4>Reviews roll in</h4>
+            <p>Happy customers get a direct review link by SMS. Unhappy ones get flagged to you first.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- HOW IT WORKS -->
-<section class="section">
-  <div class="section-label">How it works</div>
-  <h2 class="section-title">Three steps. Zero effort from you.</h2>
-  <p class="section-sub">The whole system runs on autopilot. You finish the job — Emma handles the rest.</p>
-
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">Step 01</div>
-      <div class="step-icon">📋</div>
-      <h3>Job completes</h3>
-      <p>When you mark a job done, ReceptAI automatically queues a follow-up call for 2 hours later — when the customer is still fresh and happy.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">Step 02</div>
-      <div class="step-icon">📞</div>
-      <h3>Emma calls them</h3>
-      <p>Your AI agent Emma calls the customer, checks in on the experience, and detects sentiment in real time — no scripts, no robotic prompts.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">Step 03</div>
-      <div class="step-icon">⭐</div>
-      <h3>Reviews roll in</h3>
-      <p>Happy customers get a direct Google Review link by SMS. Unhappy ones get flagged to you privately before they can post online.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- PRICING -->
-<section class="section">
-  <div class="section-label">Simple pricing</div>
-  <h2 class="section-title">One flat monthly fee. No surprises.</h2>
-  <p class="section-sub">Cancel anytime. Setup is included in your first month.</p>
-
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <div class="plan-name">Reputation Engine</div>
-      <div class="plan-price">A$149<span>/mo</span></div>
-      <div class="plan-desc">Automated review follow-up calls</div>
-      <ul class="plan-features">
-        <li>AI voice follow-up calls post-job</li>
-        <li>Sentiment detection & routing</li>
-        <li>Google Review link via SMS</li>
-        <li>Owner alert for unhappy customers</li>
-        <li>Monthly performance report</li>
-      </ul>
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Simple Pricing</div>
+      <h2>One flat monthly fee. No surprises.</h2>
+      <p>Cancel anytime. Setup is included in your first month.</p>
     </div>
 
-    <div class="pricing-card featured">
-      <div class="featured-badge">Most Popular</div>
-      <div class="plan-name">Bundle</div>
-      <div class="plan-price">A$249<span>/mo</span></div>
-      <div class="plan-desc">Reputation Engine + AI Receptionist</div>
-      <ul class="plan-features">
-        <li>Everything in Reputation Engine</li>
-        <li>AI receptionist answers missed calls</li>
-        <li>Books jobs & captures leads 24/7</li>
-        <li>SMS follow-up for missed callers</li>
-        <li>Priority support</li>
-      </ul>
-    </div>
+    <div class="pricing-grid">
+      <div class="price-card cyan-edge">
+        <div class="pname">AI Receptionist</div>
+        <div class="pamount">A$149<span>/mo</span></div>
+        <div class="pdesc">Never miss a call again</div>
+        <ul>
+          <li>AI answers calls 24/7</li>
+          <li>Books appointments instantly</li>
+          <li>Captures lead details by SMS</li>
+          <li>Handles FAQs and pricing questions</li>
+          <li>Australian accent and local tone</li>
+        </ul>
+        <a class="price-cta" href="https://calendly.com/ninosasa-trades/30min">Book a Demo</a>
+      </div>
 
-    <div class="pricing-card">
-      <div class="plan-name">AI Receptionist</div>
-      <div class="plan-price">A$149<span>/mo</span></div>
-      <div class="plan-desc">Never miss a call again</div>
-      <ul class="plan-features">
-        <li>AI answers calls 24/7</li>
-        <li>Books appointments instantly</li>
-        <li>Captures lead details by SMS</li>
-        <li>Handles FAQs & pricing questions</li>
-        <li>Australian accent & local tone</li>
-      </ul>
+      <div class="price-card bundle">
+        <span class="badge-popular">MOST POPULAR</span>
+        <div class="pname">Bundle</div>
+        <div class="pamount">A$249<span>/mo</span></div>
+        <div class="pdesc">Reputation Engine + AI Receptionist</div>
+        <ul>
+          <li>Everything in Reputation Engine</li>
+          <li>Everything in AI Receptionist</li>
+          <li>One dashboard for both agents</li>
+          <li>SMS follow-up for missed callers</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="price-cta" href="https://calendly.com/ninosasa-trades/30min">Book a Demo</a>
+      </div>
+
+      <div class="price-card gold-edge">
+        <div class="pname">Reputation Engine</div>
+        <div class="pamount">A$149<span>/mo</span></div>
+        <div class="pdesc">Automated review follow-up calls</div>
+        <ul>
+          <li>AI voice follow-up calls post-job</li>
+          <li>Sentiment detection and routing</li>
+          <li>Google review link via SMS</li>
+          <li>Owner alert for unhappy customers</li>
+          <li>Monthly performance report</li>
+        </ul>
+        <a class="price-cta" href="https://calendly.com/ninosasa-trades/30min">Book a Demo</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-inner">
-    <h2>Ready to see it <span>live</span>?</h2>
-    <p>Book a free 15-minute demo. We'll show you the system running in real time and set it up for your business the same week.</p>
-    <a href="https://calendly.com/ninosasa-trades/30min" class="cta-btn">Book Your Free Demo →</a>
-    <p class="cta-note">No lock-in contracts. Cancel anytime.</p>
+<section>
+  <div class="wrap">
+    <div class="finalcta">
+      <h2>Ready to stop missing calls<br>and reviews?</h2>
+      <p>Book a free 15-minute demo. We'll show both agents running live and set it up for your business the same week.</p>
+      <a class="btn-primary" href="https://calendly.com/ninosasa-trades/30min">Book Your Free Demo →</a>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
+<footer class="wrap">
   <span>© 2026 ReceptAI — All rights reserved.</span>
-  <span><a href="https://receptai.io" style="color:var(--muted);text-decoration:none;">receptai.io</a></span>
+  <a href="https://receptai.io">receptai.io</a>
 </footer>
 
 </body>
