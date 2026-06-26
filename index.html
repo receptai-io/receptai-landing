@@ -229,6 +229,15 @@
   .system-price{font-family:'Sora',sans-serif;font-weight:700;font-size:20px;}
   .system-price span{font-family:'Inter',sans-serif;font-weight:500;font-size:13.5px;color:var(--ink-faint);}
 
+  .video-wrap{
+    position:relative;width:100%;padding-top:56.25%;
+    border-radius:12px;overflow:hidden;margin-bottom:22px;
+    border:1px solid var(--border);background:#000;
+  }
+  .video-wrap iframe{
+    position:absolute;top:0;left:0;width:100%;height:100%;border:0;
+  }
+
   /* ---------- HOW IT WORKS (two tracks) ---------- */
   .tracks{display:flex;flex-direction:column;gap:18px;}
   .track{
@@ -408,6 +417,9 @@
         <span class="system-tag">Inbound</span>
         <h3>AI Receptionist</h3>
         <div class="when">Jake answers when the phone rings.</div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/54zKeygQ34A" title="ReceptAI — AI Receptionist Demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
         <div class="mini-transcript">
           <div class="line"><span class="who agent">Jake:</span> "G'day, thanks for calling Nino's Plumbing — sorry we couldn't grab that, I'm Jake, the AI assistant. What can I help with today?"</div>
           <div class="line"><span class="who">Caller:</span> "Hey, my hot water's out, need someone today if possible."</div>
@@ -426,6 +438,9 @@
         <span class="system-tag">Outbound</span>
         <h3>Reputation Engine</h3>
         <div class="when">Emma calls after the job's done.</div>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/gr5XLcgvkkI" title="ReceptAI — Reputation Engine Demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
         <div class="mini-transcript">
           <div class="line"><span class="who agent">Emma:</span> "Hi Dave, it's Emma from Nino's Plumbing — just checking how everything went with your hot water system today?"</div>
           <div class="line"><span class="who">Dave:</span> "Yeah, good — sorted it quick."</div>
