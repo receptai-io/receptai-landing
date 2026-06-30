@@ -105,7 +105,8 @@
   .hero h1 em{
     font-style:normal;color:var(--bg);
     background:linear-gradient(90deg,var(--cyan),var(--gold));
-    padding:0 6px;border-radius:6px;
+    padding:2px 10px;border-radius:8px;
+    display:inline-block;
   }
   .hero p.lede{
     margin-top:22px;font-size:18px;color:var(--ink-dim);max-width:520px;
@@ -141,6 +142,7 @@
     display:flex;align-items:center;justify-content:space-between;
     font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-faint);
     padding:2px 6px 14px;border-bottom:1px solid var(--border);margin-bottom:8px;
+    position:relative;z-index:3;background:var(--surface);
   }
   .calllog-head .live{display:flex;align-items:center;gap:6px;color:var(--cyan);}
   .calllog-head .live .pulse{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 1.6s infinite;}
@@ -149,6 +151,7 @@
   .calllog-track{
     display:flex;flex-direction:column;gap:10px;
     animation:scrollLog 26s linear infinite;
+    padding-top:4px;
   }
   .calllog:hover .calllog-track{animation-play-state:paused;}
   @keyframes scrollLog{0%{transform:translateY(0);}100%{transform:translateY(-50%);}}
